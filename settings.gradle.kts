@@ -25,8 +25,8 @@ listOf(
 
 rootProject.name = "sentinel-client"
 
-includeSubs(base = "sentinel-reception-sdk-client", path = "reception/sdk/client", "core")
-includeSubs(base = "sentinel-registration-sdk-client", path = "registration/sdk/client", "core")
-includeSubs(base = "sentinel-enterprise-authentication-sdk-client", path = "enterprise/authentication/sdk/client", "core")
-includeSubs(base = "sentinel-enterprise-profile-sdk-client", path = "enterprise/profile/sdk/client", "core")
-includeSubs(base = "sentinel-enterprise-onboarding-sdk-client", path = "enterprise/onboarding/sdk/client", "core")
+includeSubs(base = "sentinel-reception-sdk-client", path = "reception/sdk", "core")
+includeSubs(base = "sentinel-registration-sdk-client", path = "registration/sdk", "core")
+includeSubs(base = "sentinel-enterprise-authentication-sdk-client", path = "enterprise/authentication/sdk", "core")
+includeSubs(base = "sentinel-enterprise-profile-sdk-client", path = "enterprise/profile/sdk", "core")
+includeSubs(base = "sentinel-enterprise-onboarding-sdk-client", path = "enterprise/onboarding/sdk", "core")
