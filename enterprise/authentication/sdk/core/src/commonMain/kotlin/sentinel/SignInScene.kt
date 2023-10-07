@@ -6,9 +6,6 @@ package sentinel
 import cinematic.Scene
 import kase.LazyState
 import kase.Pending
-import sentinel.AuthenticationApi
-import sentinel.AuthenticationScenesConfig
-import sentinel.UserSession
 import sentinel.fields.SignInFields
 import symphony.toForm
 import symphony.toSubmitConfig
