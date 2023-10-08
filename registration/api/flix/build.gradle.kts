@@ -4,7 +4,7 @@ plugins {
     id("tz.co.asoft.library")
 }
 
-description = "An abstraction of authentication api"
+description = "A kotlin multiplatform implementation for the sentinel client api following the flix pattern"
 
 kotlin {
     jvm { library() }
@@ -19,7 +19,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.sentinelRegistrationApiCore)
+                api(libs.sentinel.registration.flix)
                 api(ktor.client.core)
+                implementation(libs.kase.response)
+                api(libs.lexi.api)
             }
         }
 
@@ -27,6 +30,7 @@ kotlin {
             dependencies {
                 implementation(libs.kommander.coroutines)
                 implementation(kotlinx.serialization.json)
+                implementation(libs.lexi.console)
             }
         }
 

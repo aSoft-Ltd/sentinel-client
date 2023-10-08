@@ -18,7 +18,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                api(projects.sentinelReceptionApiCore)
                 api(libs.sentinel.registration.core)
                 api(libs.identifier.legal.dtos)
             }

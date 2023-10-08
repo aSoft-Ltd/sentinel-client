@@ -1,6 +1,5 @@
 package sentinel.internal
 
-import sentinel.RegistrationApi
 import sentinel.RegistrationSceneConfig
 import sentinel.RegistrationScenes
 import sentinel.SetPasswordScene
