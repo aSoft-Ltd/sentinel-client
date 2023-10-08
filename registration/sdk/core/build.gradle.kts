@@ -13,8 +13,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(projects.sentinelRegistrationApiCore)
                 api(projects.sentinelReceptionSdkClientCore)
-                api(libs.sentinel.registration.api.core)
                 api(libs.cinematic.scene.core)
                 api(libs.hormone.core)
                 api(libs.lexi.api)
