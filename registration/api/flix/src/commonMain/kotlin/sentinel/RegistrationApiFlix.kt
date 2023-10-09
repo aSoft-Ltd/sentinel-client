@@ -1,11 +1,11 @@
 package sentinel
 
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import kase.decodeResponseFromString
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import kase.response.getOrThrow
 import koncurrent.Later
 import koncurrent.later
+import sentinel.params.SendVerificationLinkParams
 import sentinel.params.SignUpParams
 import sentinel.params.UserAccountParams
 import sentinel.params.VerificationParams
@@ -17,23 +17,39 @@ class RegistrationApiFlix(
     private val client = config.client
     private val endpoint = config.endpoint
     private val codec = config.codec
+    private val logger by config.logger
+    private val actions by lazy { RegistrationActionMessage() }
+
     override fun signUp(params: SignUpParams): Later<SignUpParams> = config.scope.later {
-        val res = client.post(endpoint.signUp()) {
-            contentType(ContentType.Application.Json)
+        val action = actions.signUp(params.email)
+        logger.info(action.begin)
+        client.post(endpoint.signUp()) {
             setBody(codec.encodeToString(SignUpParams.serializer(), params))
-        }.bodyAsText()
-        codec.decodeResponseFromString<SignUpParams>(res).getOrThrow()
+        }.getOrThrow<SignUpParams>(codec, logger, action.begin)
     }
 
-    override fun sendVerificationLink(email: String): Later<String> {
-        TODO("Not yet implemented")
+    override fun sendVerificationLink(email: String): Later<String> = config.scope.later {
+        val action = "Sending email verification to $email"
+        logger.info(action)
+        client.post(endpoint.sendEmailVerificationLink()) {
+            val params = SendVerificationLinkParams(email, config.link)
+            setBody(codec.encodeToString(SendVerificationLinkParams.serializer(), params))
+        }.getOrThrow<String>(codec, logger, action)
     }
 
-    override fun verify(params: VerificationParams): Later<VerificationParams> {
-        TODO("Not yet implemented")
+    override fun verify(params: VerificationParams): Later<VerificationParams> = config.scope.later {
+        val action = "Verifying ${params.email}"
+        logger.info(action)
+        client.post(endpoint.verifyEmail()) {
+            setBody(codec.encodeToString(VerificationParams.serializer(), params))
+        }.getOrThrow(codec, logger, action)
     }
 
-    override fun createUserAccount(params: UserAccountParams): Later<UserAccountParams> {
-        TODO("Not yet implemented")
+    override fun createUserAccount(params: UserAccountParams): Later<UserAccountParams> = config.scope.later {
+        val action = "Creating user account for ${params.loginId}"
+        logger.info(action)
+        client.post(endpoint.createAccount()) {
+            setBody(codec.encodeToString(UserAccountParams.serializer(), params))
+        }.getOrThrow(codec, logger, action)
     }
 }

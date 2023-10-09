@@ -8,6 +8,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
+import lexi.ConsoleAppender
+import lexi.LogLevel
+import lexi.Logger
 import sentinel.exceptions.UserAlreadyCompletedRegistrationException
 import sentinel.exceptions.UserDidNotBeginRegistrationException
 import sentinel.params.SignUpParams
@@ -19,10 +22,13 @@ class RegistrationApiFlixTest {
     private val api: RegistrationApi by lazy {
         val scope = CoroutineScope(SupervisorJob())
         val link = "http://test.com"
-        val client = HttpClient { }
+        val client = HttpClient {
+            developmentMode = true
+        }
         val endpoint = RegistrationEndpoint("http://127.0.0.1:8080/api/v1")
         val json = Json { }
-        RegistrationApiFlix(RegistrationFlixApiConfig(scope, link, client, endpoint, json))
+        val logger = Logger(ConsoleAppender(level = LogLevel.DEBUG))
+        RegistrationApiFlix(RegistrationFlixApiConfig(scope, link, client, logger, endpoint, json))
     }
 
 
@@ -61,7 +67,7 @@ class RegistrationApiFlixTest {
 
     @Test
     fun should_fail_to_send_an_email_verification_for_a_user_who_has_not_began_the_registration_process() = runTest {
-        val email = "john@yahoo.com"
+        val email = "john.me@yahoo.com"
         val exp = expectFailure { api.sendVerificationLink(email).await() }
         expect(exp.message).toBe(UserDidNotBeginRegistrationException(email).message)
     }

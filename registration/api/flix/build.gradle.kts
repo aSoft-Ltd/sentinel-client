@@ -21,7 +21,7 @@ kotlin {
                 api(projects.sentinelRegistrationApiCore)
                 api(libs.sentinel.registration.flix)
                 api(ktor.client.core)
-                implementation(libs.kase.response)
+                api(libs.kase.response.ktor.client)
                 api(libs.lexi.api)
             }
         }
