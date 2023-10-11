@@ -11,7 +11,6 @@ fun SetPasswordOutput.toParams(params: VerificationParams) = catching {
     UserAccountParams(
         loginId = params.email,
         password = this::password1.required,
-        permissions = iListOf(),
         registrationToken = params.token
     )
 }

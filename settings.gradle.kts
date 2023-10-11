@@ -18,8 +18,8 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
 listOf(
     "lexi", "neat", "kash-api", "geo-api", "kase", "keep", "cinematic",
     "kronecker", "epsilon-api", "krono-core", "hormone", "identifier-api",
-    "kommerce", "kollections", "koncurrent", "kommander", "cabinet-api", 
-    "snitch", "sentinel-core","identifier-client", "krono-client", "geo-client",
+    "kommerce", "kollections", "koncurrent", "kommander", "cabinet-api",
+    "snitch", "sentinel-core", "identifier-client", "krono-client", "geo-client",
     "epsilon-client"
 ).forEach { includeBuild("../$it") }
 
@@ -28,6 +28,7 @@ rootProject.name = "sentinel-client"
 includeSubs(base = "sentinel-reception-sdk-client", path = "reception/sdk", "core")
 includeSubs(base = "sentinel-registration-api", path = "registration/api", "core", "flix")
 includeSubs(base = "sentinel-registration-sdk-client", path = "registration/sdk", "core")
+includeSubs(base = "sentinel-enterprise-authentication-api", path = "enterprise/authentication/api", "core", "flix")
 includeSubs(base = "sentinel-enterprise-authentication-sdk-client", path = "enterprise/authentication/sdk", "core")
 includeSubs(base = "sentinel-enterprise-profile-sdk-client", path = "enterprise/profile/sdk", "core")
 includeSubs(base = "sentinel-enterprise-onboarding-sdk-client", path = "enterprise/onboarding/sdk", "core")
