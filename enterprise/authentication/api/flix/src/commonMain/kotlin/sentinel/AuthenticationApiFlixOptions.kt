@@ -5,7 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.StringFormat
 import lexi.Logger
 
-class AuthenticationApiFlixConfig(
+class AuthenticationApiFlixOptions(
     val scope: CoroutineScope,
     val link: String,
     val client: HttpClient,

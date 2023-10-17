@@ -10,7 +10,7 @@ import sentinel.params.PasswordResetParams
 import sentinel.params.SignInParams
 
 class AuthenticationApiFlix(
-    private val config: AuthenticationApiFlixConfig
+    private val config: AuthenticationApiFlixOptions
 ) : AuthenticationApi {
 
     private val client = config.client
