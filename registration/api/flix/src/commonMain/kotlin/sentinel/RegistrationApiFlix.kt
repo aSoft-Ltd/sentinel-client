@@ -11,7 +11,7 @@ import sentinel.params.UserAccountParams
 import sentinel.params.VerificationParams
 
 class RegistrationApiFlix(
-    private val config: RegistrationFlixApiConfig
+    private val config: RegistrationFlixApiOptions
 ) : RegistrationApi {
 
     private val client = config.client
