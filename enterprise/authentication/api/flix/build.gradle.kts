@@ -22,6 +22,7 @@ kotlin {
                 api(ktor.client.core)
                 api(libs.kase.response.ktor.client)
                 api(libs.lexi.api)
+                api(libs.keep.api)
             }
         }
 

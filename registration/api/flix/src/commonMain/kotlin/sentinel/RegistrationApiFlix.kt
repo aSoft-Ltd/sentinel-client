@@ -11,10 +11,10 @@ import sentinel.params.UserAccountParams
 import sentinel.params.VerificationParams
 
 class RegistrationApiFlix(
-    private val config: RegistrationFlixApiOptions
+    private val config: RegistrationApiFlixOptions
 ) : RegistrationApi {
 
-    private val client = config.client
+    private val client = config.http
     private val endpoint = config.endpoint
     private val codec = config.codec
     private val logger by config.logger
@@ -29,7 +29,7 @@ class RegistrationApiFlix(
     }
 
     override fun sendVerificationLink(email: String): Later<String> = config.scope.later {
-        val action = "Sending email verification to $email"
+        val action = actions.sendVerificationLink(email).begin
         logger.info(action)
         client.post(endpoint.sendEmailVerificationLink()) {
             val params = SendVerificationLinkParams(email, config.link)
@@ -38,7 +38,7 @@ class RegistrationApiFlix(
     }
 
     override fun verify(params: VerificationParams): Later<VerificationParams> = config.scope.later {
-        val action = "Verifying ${params.email}"
+        val action = actions.verify(params.email).begin
         logger.info(action)
         client.post(endpoint.verifyEmail()) {
             setBody(codec.encodeToString(VerificationParams.serializer(), params))
@@ -46,7 +46,7 @@ class RegistrationApiFlix(
     }
 
     override fun createUserAccount(params: UserAccountParams): Later<UserAccountParams> = config.scope.later {
-        val action = "Creating user account for ${params.loginId}"
+        val action = actions.createAccount(params.loginId).begin
         logger.info(action)
         client.post(endpoint.createAccount()) {
             setBody(codec.encodeToString(UserAccountParams.serializer(), params))

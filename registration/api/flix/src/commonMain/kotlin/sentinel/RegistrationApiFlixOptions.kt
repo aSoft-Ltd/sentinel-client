@@ -5,10 +5,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.StringFormat
 import lexi.Logger
 
-class RegistrationFlixApiOptions(
+class RegistrationApiFlixOptions(
     val scope: CoroutineScope,
     val link: String,
-    val client: HttpClient,
+    val http: HttpClient,
     val logger: Logger,
     val endpoint: RegistrationEndpoint,
     val codec: StringFormat
