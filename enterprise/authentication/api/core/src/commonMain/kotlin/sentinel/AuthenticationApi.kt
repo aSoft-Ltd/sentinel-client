@@ -4,13 +4,10 @@
 package sentinel
 
 import koncurrent.Later
-import sentinel.params.PasswordResetParams
-import sentinel.params.SignInParams
 import kotlin.js.JsExport
 
 interface AuthenticationApi : AuthenticationScheme {
     fun session(): Later<UserSession>
     fun signOut(): Later<Unit>
-
     fun sendPasswordResetLink(email: String): Later<String>
 }
