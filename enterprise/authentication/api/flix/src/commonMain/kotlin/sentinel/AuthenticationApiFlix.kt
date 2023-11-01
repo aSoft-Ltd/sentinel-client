@@ -27,43 +27,36 @@ class AuthenticationApiFlix(
     }
 
     override fun signIn(params: SignInParams): Later<UserSession> = options.scope.later {
-        val action = actions.signIn(params.email)
-        logger.info(action.begin)
+        val tracer = logger.trace(actions.signIn(params.email))
         val res = client.post(endpoint.signIn()) {
             setBody(codec.encodeToString(SignInParams.serializer(), params))
         }
-
-        logger.info("Got response back")
-
-        res.getOrThrow<UserSession>(codec, logger, action.begin).also {
+        res.getOrThrow<UserSession>(codec, tracer).also {
             cache.save(KEY_SESSION, it, UserSession.serializer()).await()
         }
     }
 
     override fun session(): Later<UserSession> = options.scope.later {
-        val action = actions.session()
-        logger.info(action.begin)
+        val tracer = logger.trace(actions.session())
         val session = cache.load(KEY_SESSION, UserSession.serializer()).await()
         client.post(endpoint.session()) {
             setBody(codec.encodeToString(SessionParams.serializer(), SessionParams(session.secret)))
-        }.getOrThrow(codec, logger, action.begin)
+        }.getOrThrow(codec, tracer)
     }
 
     override fun signOut(): Later<Unit> = cache.remove(KEY_SESSION).then { Unit }
 
     override fun sendPasswordResetLink(email: String): Later<String> = options.scope.later {
-        val action = actions.sendPasswordResetLink(email)
-        logger.info(action.begin)
+        val tracer = logger.trace(actions.sendPasswordResetLink(email))
         client.post(endpoint.sendPasswordResetLink()) {
             setBody(codec.encodeToString(SendPasswordResetParams.serializer(), SendPasswordResetParams(email, options.link)))
-        }.getOrThrow(codec, logger, action.begin)
+        }.getOrThrow(codec, tracer)
     }
 
     override fun resetPassword(params: PasswordResetParams): Later<PasswordResetParams> = options.scope.later {
-        val action = actions.resetPassword(params.passwordResetToken)
-        logger.info(action.begin)
+        val tracer = logger.trace(actions.resetPassword(params.passwordResetToken))
         client.post(endpoint.resetPassword()) {
             setBody(codec.encodeToString(PasswordResetParams.serializer(), params))
-        }.getOrThrow(codec, logger, action.begin)
+        }.getOrThrow(codec, tracer)
     }
 }

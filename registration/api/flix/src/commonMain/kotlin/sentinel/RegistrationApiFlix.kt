@@ -21,35 +21,31 @@ class RegistrationApiFlix(
     private val actions by lazy { RegistrationActionMessage() }
 
     override fun signUp(params: SignUpParams): Later<SignUpParams> = config.scope.later {
-        val action = actions.signUp(params.email)
-        logger.info(action.begin)
+        val tracer = logger.trace(actions.signUp(params.email))
         client.post(endpoint.signUp()) {
             setBody(codec.encodeToString(SignUpParams.serializer(), params))
-        }.getOrThrow<SignUpParams>(codec, logger, action.begin)
+        }.getOrThrow<SignUpParams>(codec, tracer)
     }
 
     override fun sendVerificationLink(email: String): Later<String> = config.scope.later {
-        val action = actions.sendVerificationLink(email).begin
-        logger.info(action)
+        val tracer = logger.trace(actions.sendVerificationLink(email))
         client.post(endpoint.sendEmailVerificationLink()) {
             val params = SendVerificationLinkParams(email, config.link)
             setBody(codec.encodeToString(SendVerificationLinkParams.serializer(), params))
-        }.getOrThrow<String>(codec, logger, action)
+        }.getOrThrow<String>(codec, tracer)
     }
 
     override fun verify(params: VerificationParams): Later<VerificationParams> = config.scope.later {
-        val action = actions.verify(params.email).begin
-        logger.info(action)
+        val tracer = logger.trace(actions.verify(params.email))
         client.post(endpoint.verifyEmail()) {
             setBody(codec.encodeToString(VerificationParams.serializer(), params))
-        }.getOrThrow(codec, logger, action)
+        }.getOrThrow(codec, tracer)
     }
 
     override fun createUserAccount(params: UserAccountParams): Later<UserAccountParams> = config.scope.later {
-        val action = actions.createAccount(params.loginId).begin
-        logger.info(action)
+        val tracer = logger.trace(actions.createAccount(params.loginId))
         client.post(endpoint.createAccount()) {
             setBody(codec.encodeToString(UserAccountParams.serializer(), params))
-        }.getOrThrow(codec, logger, action)
+        }.getOrThrow(codec, tracer)
     }
 }
