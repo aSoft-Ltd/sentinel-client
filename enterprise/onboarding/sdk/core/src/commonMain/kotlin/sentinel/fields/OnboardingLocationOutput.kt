@@ -2,6 +2,6 @@ package sentinel.fields
 
 import geo.GeoLocation
 
-interface LocationOutput {
+interface OnboardingLocationOutput {
     var location: GeoLocation?
 }

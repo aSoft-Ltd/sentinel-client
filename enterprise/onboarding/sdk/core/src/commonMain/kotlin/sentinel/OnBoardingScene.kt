@@ -10,42 +10,46 @@ import kase.Result
 import kase.bagOf
 import koncurrent.later.finally
 import koncurrent.toLater
-import sentinel.fields.AccountTypeFields
-import sentinel.fields.AddressFields
-import sentinel.fields.BusinessNameFields
-import sentinel.fields.CurrencyFields
-import symphony.Visibility
+import sentinel.fields.OnboardingAccountTypeFields
+import sentinel.fields.OnboardingAddressFields
+import sentinel.fields.OnboardingBusinessNameFields
+import sentinel.fields.OnboardingCurrencyFields
 import symphony.toForm
 import symphony.toSubmitConfig
 import kotlin.js.JsExport
+import sentinel.stage.OnboardingAccountStage
+import sentinel.stage.OnBoardingBusinessNameStage
+import sentinel.stage.OnBoardingCurrencyStage
+import sentinel.stage.OnBoardingAddressStage
+import symphony.Visibilities
 
 class OnBoardingScene(config: OnboardingScenesConfig<ProfileApi>) : BaseScene() {
 
     private val output = OnBoardingOutput()
 
-    private val af = AddressFields(output)
+    private val af = OnboardingAddressFields(output)
 
     val form = listOf(
-        OnBoardingStage.Account(
+        OnboardingAccountStage(
             heading = "Choose your account type",
             details = "Are you an individual or business?",
-            fields = AccountTypeFields(output)
+            fields = OnboardingAccountTypeFields(output)
         ),
-        OnBoardingStage.BusinessName(
+        OnBoardingBusinessNameStage(
             heading = "Enter the name of your business",
             details = "Whats the name of your business?",
-            fields = BusinessNameFields(output.type, output)
+            fields = OnboardingBusinessNameFields(output.type, output)
         ),
-        OnBoardingStage.Currency(
+        OnBoardingCurrencyStage(
             heading = "Choose your default currency",
             details = "Which currency are you operating in?",
-            fields = CurrencyFields(output),
+            fields = OnboardingCurrencyFields(output),
             onNext = {
-                if (output.address != null) return@Currency
+                if (output.address != null) return@OnBoardingCurrencyStage
                 af.address.country.set(output.country)
             }
         ),
-        OnBoardingStage.Address(
+        OnBoardingAddressStage(
             heading = "Enter your operating address",
             details = "Where are you operating from?",
             fields = af
@@ -53,7 +57,7 @@ class OnBoardingScene(config: OnboardingScenesConfig<ProfileApi>) : BaseScene() 
     ).toForm(
         output = output,
         config = config.toSubmitConfig(),
-        visibility = Visibility.Visible
+        visibility = Visibilities.Visible
     ) {
         onSubmit { completeOnBoarding() }
     }

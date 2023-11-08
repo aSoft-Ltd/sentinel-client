@@ -3,10 +3,10 @@
 package sentinel.params
 
 import kotlinx.serialization.Serializable
-import sentinel.AccountType
+import sentinel.OnBoardingAccountType
 import kotlin.js.JsExport
 
 @Serializable
 data class AccountTypeOnBoardingParams(
-    var type: AccountType?
+    var type: OnBoardingAccountType?
 )

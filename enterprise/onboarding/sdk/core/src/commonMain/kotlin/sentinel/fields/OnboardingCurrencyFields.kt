@@ -11,7 +11,7 @@ import geo.matches
 import symphony.selectSingle
 import kotlin.js.JsExport
 
-class CurrencyFields(output: CurrencyOutput) : Fields<CurrencyOutput>(output) {
+class OnboardingCurrencyFields(output: OnboardingCurrencyOutput) : Fields<OnboardingCurrencyOutput>(output) {
     val currency = selectSingle(
         name = output::country,
         items = Country.values().sortedBy { it.currency.name },

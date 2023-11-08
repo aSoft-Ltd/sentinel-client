@@ -5,20 +5,20 @@ package sentinel.fields
 
 import neat.min
 import neat.required
-import sentinel.AccountType
+import sentinel.OnBoardingAccountType
 import symphony.Fields
 import symphony.text
 import kotlin.js.JsExport
 
-class BusinessNameFields internal constructor(
-    type: AccountType?, params: BusinessNameOutput
-) : Fields<BusinessNameOutput>(params) {
+class OnboardingBusinessNameFields internal constructor(
+    type: OnBoardingAccountType?, params: OnboardingBusinessNameOutput
+) : Fields<OnboardingBusinessNameOutput>(params) {
     val name = text(
         name = output::businessName,
         label = "Business name",
         hint = "Peperoni Inc"
     ) {
-        if (type == AccountType.Business) {
+        if (type == OnBoardingAccountType.Business) {
             min(5)
             required()
         } else {

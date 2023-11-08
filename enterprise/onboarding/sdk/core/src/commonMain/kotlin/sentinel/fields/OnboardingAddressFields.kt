@@ -7,7 +7,7 @@ import geo.address
 import symphony.Fields
 import kotlin.js.JsExport
 
-class AddressFields(output: OnboardingAddressOutput) : Fields<OnboardingAddressOutput>(output) {
+class OnboardingAddressFields(output: OnboardingAddressOutput) : Fields<OnboardingAddressOutput>(output) {
     val address = address(
         name = output::address,
         label = "Business Address"

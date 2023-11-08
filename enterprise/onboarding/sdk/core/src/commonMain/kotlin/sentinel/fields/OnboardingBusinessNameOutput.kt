@@ -1,5 +1,5 @@
 package sentinel.fields
 
-interface BusinessNameOutput {
+interface OnboardingBusinessNameOutput {
     var businessName: String?
 }

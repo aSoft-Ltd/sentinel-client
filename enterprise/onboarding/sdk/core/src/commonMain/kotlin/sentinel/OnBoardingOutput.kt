@@ -6,20 +6,20 @@ import geo.GeoLocation
 import identifier.params.CorporateParams
 import kase.catching
 import neat.required
-import sentinel.fields.AccountTypeOutput
+import sentinel.fields.OnboardingAccountTypeOutput
 import sentinel.fields.OnboardingAddressOutput
-import sentinel.fields.LocationOutput
-import sentinel.fields.BusinessNameOutput
-import sentinel.fields.CurrencyOutput
+import sentinel.fields.OnboardingLocationOutput
+import sentinel.fields.OnboardingBusinessNameOutput
+import sentinel.fields.OnboardingCurrencyOutput
 
 data class OnBoardingOutput(
-    override var type: AccountType? = null,
+    override var type: OnBoardingAccountType? = null,
     override var businessName: String? = null,
     override var country: Country? = null,
     override var location: GeoLocation? = null,
     override var address: AddressOutput? = null,
     var tax: Int? = null
-) : AccountTypeOutput, BusinessNameOutput, OnboardingAddressOutput, LocationOutput, CurrencyOutput {
+) : OnboardingAccountTypeOutput, OnboardingBusinessNameOutput, OnboardingAddressOutput, OnboardingLocationOutput, OnboardingCurrencyOutput {
     fun toParams() = catching {
         CorporateParams(
             name = this::businessName.required,

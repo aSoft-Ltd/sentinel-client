@@ -2,6 +2,6 @@ package sentinel.fields
 
 import geo.Country
 
-interface CurrencyOutput {
+interface OnboardingCurrencyOutput {
     var country: Country?
 }

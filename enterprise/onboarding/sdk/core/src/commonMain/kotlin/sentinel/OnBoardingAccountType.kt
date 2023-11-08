@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
-enum class AccountType {
+enum class OnBoardingAccountType {
     Business, Individual
 }
