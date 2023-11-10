@@ -4,8 +4,7 @@
 package sentinel
 
 import koncurrent.Later
-import symphony.ImageViewerUploader
-import symphony.ImageViewerUploaderState
+import epsilon.ImageViewerUploader
 import kotlin.js.JsExport
 
 class BusinessLogoScene(

@@ -4,7 +4,7 @@
 package sentinel
 
 import koncurrent.Later
-import symphony.ImageViewerUploader
+import epsilon.ImageViewerUploader
 import kotlin.js.JsExport
 
 class PersonalProfilePictureScene(
