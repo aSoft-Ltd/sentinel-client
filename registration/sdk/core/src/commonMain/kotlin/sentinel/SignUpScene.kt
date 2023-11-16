@@ -7,13 +7,12 @@ import cinematic.BaseScene
 import koncurrent.FailedLater
 import koncurrent.Later
 import koncurrent.toLater
+import kotlin.js.JsExport
 import sentinel.fields.SignUpFields
 import sentinel.tools.loadSignUpParams
-import sentinel.tools.removeSignUpParams
 import sentinel.tools.save
 import symphony.toForm
 import symphony.toSubmitConfig
-import kotlin.js.JsExport
 
 class SignUpScene(private val config: RegistrationSceneConfig<RegistrationApi>) : BaseScene() {
 
