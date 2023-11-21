@@ -22,29 +22,25 @@ class AuthenticationApiFlix(
     private val cache = options.cache
     private val actions by lazy { AuthenticationActionMessage() }
 
-    companion object {
-        const val KEY_SESSION = "authentication.session"
-    }
-
     override fun signIn(params: SignInParams): Later<UserSession> = options.scope.later {
         val tracer = logger.trace(actions.signIn(params.email))
         val res = client.post(endpoint.signIn()) {
             setBody(codec.encodeToString(SignInParams.serializer(), params))
         }
         res.getOrThrow<UserSession>(codec, tracer).also {
-            cache.save(KEY_SESSION, it, UserSession.serializer()).await()
+            cache.save(options.sessionCacheKey, it, UserSession.serializer()).await()
         }
     }
 
     override fun session(): Later<UserSession> = options.scope.later {
         val tracer = logger.trace(actions.session())
-        val session = cache.load(KEY_SESSION, UserSession.serializer()).await()
+        val session = cache.load(options.sessionCacheKey, UserSession.serializer()).await()
         client.post(endpoint.session()) {
             setBody(codec.encodeToString(SessionParams.serializer(), SessionParams(session.secret)))
         }.getOrThrow(codec, tracer)
     }
 
-    override fun signOut(): Later<Unit> = cache.remove(KEY_SESSION).then { Unit }
+    override fun signOut(): Later<Unit> = cache.remove(options.sessionCacheKey).then { Unit }
 
     override fun sendPasswordResetLink(email: String): Later<String> = options.scope.later {
         val tracer = logger.trace(actions.sendPasswordResetLink(email))

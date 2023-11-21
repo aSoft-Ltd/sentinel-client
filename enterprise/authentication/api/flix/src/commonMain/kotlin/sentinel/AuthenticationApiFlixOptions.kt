@@ -4,7 +4,6 @@ import io.ktor.client.HttpClient
 import keep.Cache
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.StringFormat
-import lexi.Logger
 import lexi.LoggerFactory
 
 class AuthenticationApiFlixOptions(
@@ -14,5 +13,6 @@ class AuthenticationApiFlixOptions(
     val http: HttpClient,
     val logger: LoggerFactory,
     val endpoint: AuthenticationEndpoint,
-    val codec: StringFormat
+    val codec: StringFormat,
+    val sessionCacheKey: String
 )
