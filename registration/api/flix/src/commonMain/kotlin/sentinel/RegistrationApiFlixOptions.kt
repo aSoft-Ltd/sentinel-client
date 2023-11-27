@@ -10,6 +10,6 @@ class RegistrationApiFlixOptions(
     val link: String,
     val http: HttpClient,
     val logger: LoggerFactory,
-    val endpoint: RegistrationEndpoint,
+    val endpoint: RegistrationRoutes,
     val codec: StringFormat
 )
