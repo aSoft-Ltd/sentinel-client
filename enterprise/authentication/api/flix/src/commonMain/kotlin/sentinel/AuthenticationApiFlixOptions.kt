@@ -12,7 +12,7 @@ class AuthenticationApiFlixOptions(
     val cache: Cache,
     val http: HttpClient,
     val logger: LoggerFactory,
-    val endpoint: AuthenticationRoutes,
+    val endpoint: AuthenticationEndpoint,
     val codec: StringFormat,
     val sessionCacheKey: String
 )
