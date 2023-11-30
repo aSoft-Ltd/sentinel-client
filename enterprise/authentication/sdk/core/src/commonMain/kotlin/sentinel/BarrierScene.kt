@@ -20,7 +20,7 @@ class BarrierScene(config: AuthenticationScenesConfig<AuthenticationApi>) : Base
     val ui = mutableLiveOf<LazyState<UserSession>>(Pending)
 
     fun initialize(onDiscard: (Throwable) -> Unit): Later<UserSession> {
-        ui.value = Loading("Attempting to signing you in automatically, please wait . . . ")
+        ui.value = Loading("Attempting to sign you in automatically, please wait . . . ")
         return api.session().finally {
             ui.value = it.toLazyState()
             if (it is Failure) onDiscard(it.cause)
