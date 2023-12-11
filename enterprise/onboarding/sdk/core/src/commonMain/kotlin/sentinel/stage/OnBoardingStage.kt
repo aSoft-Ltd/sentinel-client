@@ -4,7 +4,7 @@
 package sentinel.stage
 
 import symphony.FormStage
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 sealed class OnBoardingStage : FormStage {
 

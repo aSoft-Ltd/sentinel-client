@@ -10,7 +10,7 @@ import neat.min
 import neat.required
 import symphony.Fields
 import symphony.password
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class SetPasswordFields : Fields<SetPasswordOutput>(SetPasswordOutput()) {
 

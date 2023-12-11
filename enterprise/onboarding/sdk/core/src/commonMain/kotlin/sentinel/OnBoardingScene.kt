@@ -16,7 +16,7 @@ import sentinel.fields.OnboardingBusinessNameFields
 import sentinel.fields.OnboardingCurrencyFields
 import symphony.toForm
 import symphony.toSubmitConfig
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import sentinel.stage.OnboardingAccountStage
 import sentinel.stage.OnBoardingBusinessNameStage
 import sentinel.stage.OnBoardingCurrencyStage

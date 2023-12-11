@@ -3,7 +3,7 @@
 
 package sentinel
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class PasswordScenes(config: AuthenticationScenesConfig<AuthenticationApi>) {
     val forgot by lazy { PasswordForgotScene(config) }

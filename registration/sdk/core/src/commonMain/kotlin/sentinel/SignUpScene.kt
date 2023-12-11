@@ -7,7 +7,7 @@ import cinematic.BaseScene
 import koncurrent.FailedLater
 import koncurrent.Later
 import koncurrent.toLater
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import sentinel.fields.SignUpFields
 import sentinel.tools.loadSignUpParams
 import sentinel.tools.save

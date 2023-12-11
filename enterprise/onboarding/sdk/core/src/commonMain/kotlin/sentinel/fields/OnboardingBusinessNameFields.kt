@@ -8,7 +8,7 @@ import neat.required
 import sentinel.OnBoardingAccountType
 import symphony.Fields
 import symphony.text
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class OnboardingBusinessNameFields internal constructor(
     type: OnBoardingAccountType?, params: OnboardingBusinessNameOutput

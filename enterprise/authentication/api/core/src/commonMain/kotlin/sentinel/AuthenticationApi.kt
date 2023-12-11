@@ -4,7 +4,7 @@
 package sentinel
 
 import koncurrent.Later
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface AuthenticationApi : AuthenticationScheme {
     fun session(): Later<UserSession>

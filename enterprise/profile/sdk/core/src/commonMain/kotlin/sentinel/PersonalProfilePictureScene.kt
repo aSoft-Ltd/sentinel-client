@@ -5,7 +5,7 @@ package sentinel
 
 import koncurrent.Later
 import epsilon.ImageViewerUploader
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class PersonalProfilePictureScene(
     private val config: ProfileScenesConfig<ProfileApiProvider>

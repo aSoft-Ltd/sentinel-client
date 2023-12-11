@@ -3,7 +3,7 @@
 
 package sentinel.stage
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import sentinel.fields.OnboardingAccountTypeFields
 
 

@@ -3,7 +3,7 @@
 
 package sentinel
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class AuthenticationScenes(config: AuthenticationScenesConfig<AuthenticationApi>) {
     val signIn by lazy { SignInScene(config) }

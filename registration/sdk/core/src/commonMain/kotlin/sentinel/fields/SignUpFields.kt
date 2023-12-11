@@ -7,7 +7,7 @@ import neat.required
 import symphony.Fields
 import symphony.email
 import symphony.text
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class SignUpFields : Fields<SignUpOutput>(SignUpOutput()) {
 

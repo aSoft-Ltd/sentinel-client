@@ -13,7 +13,7 @@ import koncurrent.later.finally
 import sentinel.tools.loadUserAccountParams
 import sentinel.tools.removeUserAccountParams
 import sentinel.transformers.toSignInParams
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class RegistrationScene(config: AuthenticationScenesConfig<AuthenticationApi>) : LazyScene<UserSession>(Pending) {
     private val api = config.api

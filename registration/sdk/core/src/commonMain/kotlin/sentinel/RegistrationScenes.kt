@@ -3,7 +3,7 @@
 
 package sentinel
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface RegistrationScenes {
     val signUp: SignUpScene

@@ -7,7 +7,7 @@ import sentinel.OnBoardingAccountType
 import symphony.Fields
 import symphony.Option
 import symphony.selectSingle
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class OnboardingAccountTypeFields(result: OnboardingAccountTypeOutput) : Fields<OnboardingAccountTypeOutput>(result) {
     val type = selectSingle(

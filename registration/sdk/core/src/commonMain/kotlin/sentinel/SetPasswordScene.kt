@@ -10,7 +10,7 @@ import sentinel.tools.save
 import sentinel.transformers.toParams
 import symphony.toForm
 import symphony.toSubmitConfig
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class SetPasswordScene(private val config: RegistrationSceneConfig<RegistrationApi>) {
     private var successFunction: (() -> Unit)? = null

@@ -14,7 +14,7 @@ import sentinel.fields.PasswordForgotOutput
 import symphony.Form
 import symphony.toForm
 import symphony.toSubmitConfig
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class PasswordForgotScene(
     private val config: AuthenticationScenesConfig<AuthenticationApi>

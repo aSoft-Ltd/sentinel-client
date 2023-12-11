@@ -1,7 +1,7 @@
 @file:JsExport
 package sentinel.stage
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import sentinel.fields.OnboardingAddressFields
 
 data class OnBoardingAddressStage(

@@ -16,7 +16,7 @@ import sentinel.params.VerificationParams
 import sentinel.tools.loadSignUpParams
 import sentinel.tools.removeSignUpParams
 import sentinel.tools.save
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class VerificationScene(
     private val config: RegistrationSceneConfig<RegistrationApi>

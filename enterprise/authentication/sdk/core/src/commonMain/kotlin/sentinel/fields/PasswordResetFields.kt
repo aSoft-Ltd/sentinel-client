@@ -10,7 +10,7 @@ import neat.required
 import symphony.Fields
 import symphony.password
 import symphony.text
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class PasswordResetFields : Fields<PasswordResetOutput>(PasswordResetOutput()) {
     val password1 = password(

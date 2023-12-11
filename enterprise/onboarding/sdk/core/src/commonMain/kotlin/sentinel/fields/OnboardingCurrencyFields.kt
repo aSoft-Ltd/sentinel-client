@@ -9,7 +9,7 @@ import symphony.Fields
 import symphony.Option
 import geo.matches
 import symphony.selectSingle
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class OnboardingCurrencyFields(output: OnboardingCurrencyOutput) : Fields<OnboardingCurrencyOutput>(output) {
     val currency = selectSingle(

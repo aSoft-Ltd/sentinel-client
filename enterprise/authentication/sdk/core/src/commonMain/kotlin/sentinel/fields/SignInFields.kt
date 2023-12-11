@@ -6,7 +6,7 @@ package sentinel.fields
 import symphony.Fields
 import symphony.email
 import symphony.password
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class SignInFields : Fields<SignInFormOutput>(SignInFormOutput("", "")) {
 

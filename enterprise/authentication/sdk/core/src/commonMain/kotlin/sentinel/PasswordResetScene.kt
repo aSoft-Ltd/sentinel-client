@@ -19,7 +19,7 @@ import sentinel.transformers.toParams
 import symphony.Form
 import symphony.toForm
 import symphony.toSubmitConfig
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class PasswordResetScene(
     private val config: AuthenticationScenesConfig<AuthenticationApi>

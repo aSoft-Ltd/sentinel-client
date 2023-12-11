@@ -9,7 +9,7 @@ import kase.Pending
 import sentinel.fields.SignInFields
 import symphony.toForm
 import symphony.toSubmitConfig
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class SignInScene(config: AuthenticationScenesConfig<AuthenticationApi>) : Scene<LazyState<UserSession>>(Pending) {
 

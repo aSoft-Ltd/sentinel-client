@@ -12,7 +12,7 @@ import kase.Pending
 import kase.toLazyState
 import koncurrent.Later
 import koncurrent.later.finally
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class BarrierScene(config: AuthenticationScenesConfig<AuthenticationApi>) : BaseScene() {
     private val api = config.api
