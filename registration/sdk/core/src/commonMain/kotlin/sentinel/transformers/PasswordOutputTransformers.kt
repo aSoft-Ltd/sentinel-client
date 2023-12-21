@@ -1,7 +1,6 @@
 package sentinel.transformers
 
 import kase.catching
-import kollections.iListOf
 import neat.required
 import sentinel.fields.SetPasswordOutput
 import sentinel.params.UserAccountParams

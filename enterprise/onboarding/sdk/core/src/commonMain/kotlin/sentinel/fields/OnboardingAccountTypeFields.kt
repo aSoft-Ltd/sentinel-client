@@ -8,12 +8,13 @@ import symphony.Fields
 import symphony.Option
 import symphony.selectSingle
 import kotlinx.JsExport
+import kollections.toList
 
 class OnboardingAccountTypeFields(result: OnboardingAccountTypeOutput) : Fields<OnboardingAccountTypeOutput>(result) {
     val type = selectSingle(
         name = output::type,
         label = "Account Type",
-        items = OnBoardingAccountType.values().toList(),
+        items = OnBoardingAccountType.entries.toList(),
         mapper = { Option(it.name, it.name) }
     )
 }
