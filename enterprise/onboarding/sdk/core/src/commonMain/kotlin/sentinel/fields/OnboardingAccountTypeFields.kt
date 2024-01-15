@@ -14,7 +14,7 @@ class OnboardingAccountTypeFields(result: OnboardingAccountTypeOutput) : Fields<
     val type = selectSingle(
         name = output::type,
         label = "Account Type",
-        items = OnBoardingAccountType.entries.toList(),
+        items = OnBoardingAccountType.values().toList(),
         mapper = { Option(it.name, it.name) }
     )
 }
