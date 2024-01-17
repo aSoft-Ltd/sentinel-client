@@ -17,6 +17,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.sentinelApiRegistrationCore)
             api(libs.sentinel.schemes.registration.email)
         }
     }

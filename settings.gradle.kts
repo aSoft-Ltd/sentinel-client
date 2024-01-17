@@ -20,7 +20,7 @@ listOf(
     "kronecker", "epsilon-api", "krono-core", "hormone", "identifier-api",
     "kommerce", "kollections", "koncurrent", "kommander", "cabinet-api",
     "snitch", "sentinel-core", "identifier-client", "krono-client", "geo-client",
-    "epsilon-client"
+    "epsilon-client", "raven-core"
 ).forEach { includeBuild("../$it") }
 
 rootProject.name = "sentinel-client"
@@ -28,6 +28,9 @@ rootProject.name = "sentinel-client"
 includeSubs(base = "sentinel-api-registration", "api/registration", "core")
 includeSubs(base = "sentinel-api-registration-email", "api/registration/email", "core", "test", "flix")
 includeSubs(base = "sentinel-api-registration-phone", "api/registration/phone", "core", "test", "flix")
+
+includeSubs(base = "sentinel-api-enterprise-authentication", "api/enterprise/authentication", "core")
+includeSubs(base = "sentinel-api-enterprise-authentication-email", "api/enterprise/authentication/email", "core", "test", "flix")
 
 includeSubs(base = "sentinel-reception-sdk-client", path = "reception/sdk", "core")
 includeSubs(base = "sentinel-registration-api", path = "registration/api", "core", "flix")

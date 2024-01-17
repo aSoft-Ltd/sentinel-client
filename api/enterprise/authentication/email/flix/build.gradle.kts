@@ -18,7 +18,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.sentinelApiRegistrationEmailCore)
+                api(projects.sentinelApiEnterpriseAuthenticationEmailCore)
                 api(libs.koncurrent.later.coroutines)
                 api(ktor.client.core)
                 api(libs.kase.response.ktor.client)

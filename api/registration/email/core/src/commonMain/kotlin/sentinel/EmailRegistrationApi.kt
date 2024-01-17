@@ -6,6 +6,6 @@ package sentinel
 import koncurrent.Later
 import kotlinx.JsExport
 
-interface RegistrationApi : RegistrationScheme {
+interface EmailRegistrationApi : RegistrationApi, EmailRegistrationScheme {
     fun sendVerificationLink(email: String): Later<String>
 }
