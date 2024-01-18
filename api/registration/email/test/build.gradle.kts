@@ -17,7 +17,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.sentinelApiRegistrationEmailCore)
+            api(projects.sentinelApiRegistrationEmailCore)
             implementation(libs.raven.api)
             implementation(libs.kommander.coroutines)
             implementation(libs.koncurrent.later.coroutines)

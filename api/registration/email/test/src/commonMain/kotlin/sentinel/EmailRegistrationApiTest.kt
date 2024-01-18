@@ -1,58 +1,26 @@
 package sentinel
 
-//import io.ktor.client.HttpClient
 import kommander.expect
 import kommander.expectFailure
 import koncurrent.later.await
-import kotlin.test.Test
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
-//import lexi.ConsoleAppender
-//import lexi.JsonLogFormatter
-//import lexi.LogLevel
-//import lexi.SimpleLogFormatter
-//import lexi.loggerFactory
-//import raven.BusEmailReceiver
 import raven.EmailReceiver
-//import raven.FlixMailBoxOptions
-//import raven.FlixMailbox
-//import sanity.RemoteBus
-//import sanity.SanityEndpoint
 import sentinel.exceptions.InvalidTokenForRegistrationException
-import sentinel.exceptions.UserAlreadyBeganRegistrationException
-import sentinel.exceptions.UserAlreadyCompletedRegistrationException
-import sentinel.exceptions.UserDidNotBeginRegistrationException
 import sentinel.exceptions.UserWithEmailAlreadyBeganRegistrationException
 import sentinel.exceptions.UserWithEmailAlreadyCompletedRegistrationException
 import sentinel.exceptions.UserWithEmailDidNotBeginRegistrationException
 import sentinel.params.EmailSignUpParams
 import sentinel.params.EmailVerificationParams
+import kotlin.test.Test
 
 abstract class EmailRegistrationApiTest(private val api: EmailRegistrationApi, private val receiver: EmailReceiver) {
-
-//    private val scope = CoroutineScope(SupervisorJob())
-////    private val url = "http://192.168.1.109:8080/api/v1"
-//    private val url = "http://127.0.0.1:8080/api/v1"
-//    val bus = RemoteBus(SanityEndpoint(url))
-//    val receiver = BusEmailReceiver(bus)
-//
-//    private val api: RegistrationApi by lazy {
-//        val link = "http://test.com"
-//        val client = HttpClient { developmentMode = true }
-//        val endpoint = RegistrationEndpoint(url)
-//        val json = Json { }
-//        val logger = loggerFactory { add(ConsoleAppender(level = LogLevel.DEBUG, formatter = SimpleLogFormatter())) }
-//        RegistrationApiFlix(RegistrationApiFlixOptions(scope, link, client, logger, endpoint, json))
-//    }
-
     @Test
     fun should_fail_to_sign_up_an_already_verified_account() = runTest {
         api.signUp(EmailSignUpParams("Anderson", "andy@lamax.com")).await()
         val exp = expectFailure {
             api.signUp(EmailSignUpParams("Anderson", "andy@lamax.com")).await()
         }
+        api.abort("andy@lamax.com").await()
         expect(exp.message).toBe(UserWithEmailAlreadyBeganRegistrationException("andy@lamax.com").message)
     }
 
@@ -68,6 +36,7 @@ abstract class EmailRegistrationApiTest(private val api: EmailRegistrationApi, p
         api.verify(EmailVerificationParams(email = res.email, token = token)).await()
 
         val exp = expectFailure { api.signUp(params1).await() }
+        api.abort(params1.email).await()
         expect(exp.message).toBe(UserWithEmailAlreadyCompletedRegistrationException(params1.email).message)
     }
 
@@ -84,6 +53,7 @@ abstract class EmailRegistrationApiTest(private val api: EmailRegistrationApi, p
         api.signUp(EmailSignUpParams("Bucky Barnes", params.email)).await()
         api.sendVerificationLink(params.email).await()
         val exp = expectFailure { api.verify(params).await() }
+        api.abort(params.email).await()
         expect(exp.message).toBe(InvalidTokenForRegistrationException(params.token).message)
     }
 }

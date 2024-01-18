@@ -12,16 +12,16 @@ suspend fun EmailRegistrationApi.register(
     email: String,
     password: String,
 ) {
-    val params1 = EmailSignUpParams(name,email)
+    val params1 = EmailSignUpParams(name, email)
     val res = signUp(params1).await()
 
     val message = receiver.anticipate()
 
     sendVerificationLink(email).await()
 
-    val token = message.await().body.split(" ").last()
+    val token = message.await().body.split("=").last()
 
     verify(EmailVerificationParams(email = res.email, token = token)).await()
 
-    createUserAccount(UserAccountParams(email,password,token)).await()
+    createUserAccount(UserAccountParams(email, password, token)).await()
 }

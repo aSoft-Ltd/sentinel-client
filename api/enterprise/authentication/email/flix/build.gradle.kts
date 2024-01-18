@@ -16,28 +16,13 @@ kotlin {
     val mingwTargets = if (Targeting.MINGW) mingwTargets() else listOf()
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                api(projects.sentinelApiEnterpriseAuthenticationEmailCore)
-                api(libs.koncurrent.later.coroutines)
-                api(ktor.client.core)
-                api(libs.kase.response.ktor.client)
-                api(libs.lexi.api)
-            }
-        }
-
-        val commonTest by getting {
-            dependencies {
-                implementation(libs.kommander.coroutines)
-                implementation(kotlinx.serialization.json)
-                implementation(libs.lexi.console)
-            }
-        }
-
-        val jvmTest by getting {
-            dependencies {
-                implementation(ktor.client.cio)
-            }
+        commonMain.dependencies {
+            api(projects.sentinelApiEnterpriseAuthenticationEmailCore)
+            api(libs.koncurrent.later.coroutines)
+            api(ktor.client.core)
+            api(libs.keep.api)
+            api(libs.kase.response.ktor.client)
+            api(libs.lexi.api)
         }
     }
 }
