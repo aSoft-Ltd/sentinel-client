@@ -10,7 +10,7 @@ import kotlinx.JsExport
 import sentinel.fields.SignInFields
 import symphony.toForm
 
-class SignInScene(options: AuthenticationSceneOptions<EmailAuthenticationApi>) : Scene<LazyState<UserSession>>(Pending) {
+class SignInScene(options: AuthenticationSceneOptions) : Scene<LazyState<UserSession>>(Pending) {
 
     private val api = options.api
     private var successHandler: ((UserSession) -> Unit)? = null

@@ -15,14 +15,13 @@ import sentinel.fields.PasswordForgotFields
 import sentinel.fields.PasswordForgotOutput
 import symphony.Form
 import symphony.toForm
-import symphony.toSubmitConfig
 import kotlinx.JsExport
 
 class PasswordForgotScene(
-    private val config: AuthenticationSceneOptions<AuthenticationApi>
+    private val options: AuthenticationSceneOptions
 ) : LazyScene<Form<Any, PasswordForgotOutput, PasswordForgotFields>>() {
 
-    protected val api = config.api
+    protected val api = options.api
 
     fun initialize() {
         ui.value = Success(form())
@@ -31,25 +30,25 @@ class PasswordForgotScene(
     private fun form() = PasswordForgotFields().toForm(
         heading = "Forgot your password?",
         details = "Reset your credentials",
-        config = config.toSubmitConfig()
+        logger = options.logger
     ) {
         onCancel { ui.value = Pending }
         onSubmit { output ->
             output.toLater().then {
                 it::email.required
             }.andThen {
-                config.cache.save(PasswordScenes.KEY_RESET_EMAIL,it)
+                options.cache.save(PasswordScenes.KEY_RESET_EMAIL,it)
             }.andThen {
                 api.sendPasswordResetLink(it)
             }
         }
         onSuccess { email: String ->
-            config.toaster.makeNewSuccess("Password reset")
+            options.toaster.makeNewSuccess("Password reset")
                 .withBody("A Password reset link has been sent to your email")
                 .show()
         }
         onFailure {
-            config.toaster.makeNewError("Password reset")
+            options.toaster.makeNewError("Password reset")
                 .withBody(it.message ?: "Unknown error")
                 .show()
         }

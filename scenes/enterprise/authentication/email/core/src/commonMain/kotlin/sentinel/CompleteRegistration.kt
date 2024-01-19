@@ -14,7 +14,7 @@ import koncurrent.Later
 import koncurrent.later.finally
 import kotlinx.JsExport
 
-class CompleteRegistration(config: AuthenticationSceneOptions<AuthenticationApi>) : BaseScene() {
+class CompleteRegistration(config: AuthenticationSceneOptions) : BaseScene() {
     private val api = config.api
 
     val ui = mutableLiveOf<LazyState<UserSession>>(Pending)

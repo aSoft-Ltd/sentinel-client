@@ -23,7 +23,7 @@ import kotlinx.JsExport
 import sentinel.params.EmailSignInParams
 
 class PasswordResetScene(
-    private val options: AuthenticationSceneOptions<AuthenticationApi>
+    private val options: AuthenticationSceneOptions
 ) : LazyScene<Form<Any, PasswordResetOutput, PasswordResetFields>>() {
 
     protected val api = options.api

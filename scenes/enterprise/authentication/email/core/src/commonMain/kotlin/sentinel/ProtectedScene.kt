@@ -14,8 +14,8 @@ import koncurrent.Later
 import koncurrent.later.finally
 import kotlinx.JsExport
 
-class ProtectedScene(config: AuthenticationSceneOptions<AuthenticationApi>) : BaseScene() {
-    private val api = config.api
+class ProtectedScene(options: AuthenticationSceneOptions) : BaseScene() {
+    private val api = options.api
 
     val ui = mutableLiveOf<LazyState<UserSession>>(Pending)
 

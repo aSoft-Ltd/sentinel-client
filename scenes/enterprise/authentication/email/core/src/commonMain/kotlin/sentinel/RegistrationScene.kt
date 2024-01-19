@@ -16,9 +16,9 @@ import sentinel.tools.loadUserAccountParams
 import sentinel.tools.removeUserAccountParams
 import sentinel.transformers.toEmailSignInParams
 
-class RegistrationScene(config: AuthenticationSceneOptions<EmailAuthenticationApi>) : LazyScene<UserSession>(Pending) {
-    private val api = config.api
-    private val cache = config.cache
+class RegistrationScene(options: AuthenticationSceneOptions) : LazyScene<UserSession>(Pending) {
+    private val api = options.api
+    private val cache = options.cache
 
     fun initialize(onSuccess: () -> Unit): Later<UserSession> {
         ui.value = Loading("Attempting to signing you in automatically, please wait . . . ")
