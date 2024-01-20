@@ -27,10 +27,9 @@ class EmailAuthenticationApiFlix(
 
     override fun signIn(params: EmailSignInParams): Later<UserSession> = options.scope.later {
         val tracer = logger.trace(actions.signIn(params.email))
-        val res = client.post(endpoint.signIn()) {
+        client.post(endpoint.signIn()) {
             setBody(codec.encodeToString(EmailSignInParams.serializer(), params))
-        }
-        res.getOrThrow<UserSession>(codec, tracer).also {
+        }.getOrThrow<UserSession>(codec, tracer).also {
             cache.save(options.sessionCacheKey, it, UserSession.serializer()).await()
         }
     }

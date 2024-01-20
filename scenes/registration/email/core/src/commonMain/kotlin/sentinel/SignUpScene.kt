@@ -15,7 +15,7 @@ import sentinel.tools.loadEmailSignUpParams
 import sentinel.tools.save
 import symphony.toForm
 
-class SignUpScene(private val options: RegistrationSceneOptions<EmailRegistrationApi>) : BaseScene() {
+class SignUpScene(private val options: RegistrationSceneOptions) : BaseScene() {
 
     private val api get() = options.api
 

@@ -19,10 +19,9 @@ kotlin {
         commonMain.dependencies {
             api(projects.sentinelApiEnterpriseAuthenticationEmailCore)
             api(projects.sentinelApiRegistrationEmailTest)
-            implementation(libs.raven.api)
-            implementation(libs.kommander.coroutines)
-            implementation(libs.koncurrent.later.coroutines)
-            implementation(kotlinx.serialization.json)
+            api(libs.raven.api)
+            api(libs.kommander.coroutines)
+            api(libs.koncurrent.later.coroutines)
         }
     }
 }

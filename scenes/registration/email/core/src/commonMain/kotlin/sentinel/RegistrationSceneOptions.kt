@@ -2,14 +2,12 @@
 
 package sentinel
 
-import kotlinx.JsExport
 import keep.Cache
+import kotlinx.JsExport
 import lexi.LoggerFactory
 
-class RegistrationSceneOptions<out A>(
-    val api: A,
+class RegistrationSceneOptions(
+    val api: EmailRegistrationApi,
     val cache: Cache,
     val logger: LoggerFactory
-) {
-    fun <R> map(transformer: (A) -> R) = RegistrationSceneOptions(transformer(api), cache, logger)
-}
+)

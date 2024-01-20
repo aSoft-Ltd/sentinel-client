@@ -20,7 +20,7 @@ import sentinel.tools.removeEmailSignUpParams
 import sentinel.tools.save
 
 class VerificationScene(
-    private val options: RegistrationSceneOptions<EmailRegistrationApi>
+    private val options: RegistrationSceneOptions
 ) : LazyScene<EmailVerificationParams>(Pending) {
 
     private val api = options.api

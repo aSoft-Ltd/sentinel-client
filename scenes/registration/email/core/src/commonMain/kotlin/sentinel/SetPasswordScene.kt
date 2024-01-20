@@ -13,7 +13,7 @@ import kotlinx.JsExport
 import sentinel.tools.loadEmailVerificationParams
 import sentinel.tools.removeEmailVerificationParams
 
-class SetPasswordScene(private val options: RegistrationSceneOptions<RegistrationApi>) {
+class SetPasswordScene(private val options: RegistrationSceneOptions) {
     private var successFunction: (() -> Unit)? = null
 
     private val cache = options.cache
