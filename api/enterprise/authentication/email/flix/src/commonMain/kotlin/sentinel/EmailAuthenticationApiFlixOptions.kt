@@ -14,5 +14,6 @@ class EmailAuthenticationApiFlixOptions(
     val logger: LoggerFactory,
     val endpoint: EmailAuthenticationEndpoint,
     val codec: StringFormat,
-    val sessionCacheKey: String
+    val sessionCacheKey: String,
+    val meta: String
 )

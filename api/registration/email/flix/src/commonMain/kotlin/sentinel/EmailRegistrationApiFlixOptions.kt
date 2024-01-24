@@ -11,5 +11,6 @@ class EmailRegistrationApiFlixOptions(
     val http: HttpClient,
     val logger: LoggerFactory,
     val endpoint: EmailRegistrationEndpoint,
-    val codec: StringFormat
+    val codec: StringFormat,
+    val meta: String
 )

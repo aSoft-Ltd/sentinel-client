@@ -31,7 +31,7 @@ class EmailRegistrationApiFlix(
     override fun sendVerificationLink(email: String): Later<String> = config.scope.later {
         val tracer = logger.trace(actions.sendVerificationLink(email))
         client.post(endpoint.sendEmailVerificationLink()) {
-            val params = SendVerificationLinkParams(email, config.link)
+            val params = SendVerificationLinkParams(email, config.link, config.meta)
             setBody(codec.encodeToString(SendVerificationLinkParams.serializer(), params))
         }.getOrThrow<String>(codec, tracer)
     }

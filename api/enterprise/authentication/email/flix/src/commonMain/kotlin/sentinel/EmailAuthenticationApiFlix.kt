@@ -55,8 +55,9 @@ class EmailAuthenticationApiFlix(
 
     override fun sendPasswordResetLink(email: String): Later<String> = options.scope.later {
         val tracer = logger.trace(actions.sendPasswordResetLink(email))
+        val params = SendPasswordResetParams(email, options.link, options.meta)
         client.post(endpoint.sendPasswordResetLink()) {
-            setBody(codec.encodeToString(SendPasswordResetParams.serializer(), SendPasswordResetParams(email, options.link)))
+            setBody(codec.encodeToString(SendPasswordResetParams.serializer(), params))
         }.getOrThrow(codec, tracer)
     }
 
