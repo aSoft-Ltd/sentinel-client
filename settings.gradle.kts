@@ -32,9 +32,13 @@ includeSubs(base = "sentinel-api-registration-phone", "api/registration/phone", 
 includeSubs(base = "sentinel-api-enterprise-authentication", "api/enterprise/authentication", "core")
 includeSubs(base = "sentinel-api-enterprise-authentication-email", "api/enterprise/authentication/email", "core", "test", "flix")
 
+includeSubs(base = "sentinel-api-enterprise-profile", "api/enterprise/profile", "core")
+
 includeSubs(base = "sentinel-scenes-reception", "scenes/reception", "email")
 includeSubs(base = "sentinel-scenes-registration-email", "scenes/registration/email", "core", "test")
 includeSubs(base = "sentinel-scenes-enterprise-authentication-email", "scenes/enterprise/authentication/email", "core", "test")
+includeSubs(base = "sentinel-scenes-enterprise-onboarding", "scenes/enterprise/onboarding", "core")
+includeSubs(base = "sentinel-scenes-enterprise-profile", "scenes/enterprise/profile", "core")
 
 // deprecated dependencies
 includeSubs(base = "sentinel-reception-sdk-client", path = "reception/sdk", "core")
