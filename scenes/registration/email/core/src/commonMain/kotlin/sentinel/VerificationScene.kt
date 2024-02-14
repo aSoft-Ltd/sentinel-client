@@ -30,7 +30,7 @@ class VerificationScene(
     fun initialize(
         link: String,
         onCompleted: (Result<EmailVerificationParams>) -> Unit
-    ): Later<Any> = cache.loadEmailSignUpParams().andThen { params ->
+    ): Later<EmailVerificationParams> = cache.loadEmailSignUpParams().andThen { params ->
         ui.value = Loading(message = "Verifying your account (${params.email}), please wait . . . ")
         api.verify(EmailVerificationParams(params.email, parseToken(link).getOrThrow()))
     }.andThen {
