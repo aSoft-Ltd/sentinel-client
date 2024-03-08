@@ -10,4 +10,5 @@ class AuthenticationScenes(options: AuthenticationSceneOptions) {
     val barrier by lazy { ProtectedScene(options) }
     val registration by lazy { RegistrationScene(options) }
     val password by lazy { PasswordScenes(options) }
+    val welcome by lazy { CompleteRegistration(options) }
 }
