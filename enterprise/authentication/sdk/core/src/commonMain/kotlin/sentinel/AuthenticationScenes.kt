@@ -10,4 +10,5 @@ class AuthenticationScenes(config: AuthenticationScenesConfig<AuthenticationApi>
     val barrier by lazy { BarrierScene(config) }
     val registration by lazy { RegistrationScene(config) }
     val password by lazy { PasswordScenes(config) }
+    val welcome by lazy { CompleteRegistration(config) }
 }

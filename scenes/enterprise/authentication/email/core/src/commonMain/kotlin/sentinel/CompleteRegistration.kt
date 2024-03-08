@@ -3,31 +3,30 @@
 
 package sentinel
 
-import cinematic.BaseScene
-import cinematic.mutableLiveOf
-import kase.Failure
-import kase.LazyState
+import cinematic.LazyScene
 import kase.Loading
-import kase.Pending
+import kase.Result
 import kase.toLazyState
 import koncurrent.Later
+import koncurrent.later.andThen
 import koncurrent.later.finally
 import kotlinx.JsExport
+import sentinel.params.EmailSignInParams
+import sentinel.tools.loadUserAccountParams
+import sentinel.tools.removeUserAccountParams
 
-class CompleteRegistration(config: AuthenticationSceneOptions) : BaseScene() {
+class CompleteRegistration(config: AuthenticationSceneOptions) : LazyScene<UserSession>() {
     private val api = config.api
+    private val cache = config.cache
 
-    val ui = mutableLiveOf<LazyState<UserSession>>(Pending)
-
-    fun initialize(onDiscard: (Throwable) -> Unit): Later<UserSession> {
-        ui.value = Loading("Attempting to signing you in automatically, please wait . . . ")
-        return api.session().finally {
+    fun initialize(callback: (Result<UserSession>) -> Unit): Later<UserSession> {
+        ui.value = Loading("Please wait as we set your account up . . .")
+        return cache.loadUserAccountParams().andThen {
+            api.signIn(EmailSignInParams(it.loginId, it.password))
+        }.finally {
             ui.value = it.toLazyState()
-            if (it is Failure) onDiscard(it.cause)
+            cache.removeUserAccountParams()
+            callback(it)
         }
-    }
-
-    fun deInitialize() {
-        ui.value = Pending
     }
 }
