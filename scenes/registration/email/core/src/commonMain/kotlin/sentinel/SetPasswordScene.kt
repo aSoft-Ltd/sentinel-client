@@ -24,22 +24,18 @@ class SetPasswordScene(private val options: RegistrationSceneOptions) {
 
     fun deInitialize() {
         successFunction = null
-        form.fields.finish()
+//        form.fields.finish()
     }
 
-    val form = SetPasswordFields().toForm(
+    fun form(link:String) = SetPasswordFields(link).toForm(
         heading = "Make your account secure",
         details = "Set up your password",
         logger = options.logger
     ) {
+
         onSubmit { output ->
-            cache.loadEmailVerificationParams().then {
-                output.toParams(it).getOrThrow()
-            }.andThen {
-                cache.save(it)
-            }.andThen {
-                options.api.createUserAccount(it)
-            }
+            val params = VerificationScene.parseUrlToEmailVerificationParams(link)
+            options.api.createUserAccount(output.toParams(params).getOrThrow())
         }
 
         onSuccess {

@@ -12,7 +12,9 @@ import symphony.Fields
 import symphony.password
 import kotlinx.JsExport
 
-class SetPasswordFields : Fields<SetPasswordOutput>(SetPasswordOutput()) {
+class SetPasswordFields(
+    val link:String
+) : Fields<SetPasswordOutput>(SetPasswordOutput()) {
 
     val password1 = password(
         name = output::password1,

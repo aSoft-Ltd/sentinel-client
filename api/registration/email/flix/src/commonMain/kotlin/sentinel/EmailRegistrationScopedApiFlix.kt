@@ -29,12 +29,12 @@ class EmailRegistrationScopedApiFlix(
         header(resolver.key, resolver.value)
     }
 
-    override fun signUp(params: EmailSignUpParams): Later<EmailSignUpParams> = config.scope.later {
+    override fun signUp(params: EmailSignUpParams): Later<EmailRegistrationCandidateDto> = config.scope.later {
         val tracer = logger.trace(actions.signUp(params.email))
         client.post(endpoint.signUp()) {
             header(resolver)
             setBody(codec.encodeToString(EmailSignUpParams.serializer(), params))
-        }.getOrThrow<EmailSignUpParams>(codec, tracer)
+        }.getOrThrow<EmailRegistrationCandidateDto>(codec, tracer)
     }
 
     override fun sendVerificationLink(email: String): Later<String> = config.scope.later {

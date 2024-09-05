@@ -34,15 +34,13 @@ class VerificationScene(
     fun initialize(
         link: String,
         onCompleted: (Result<VerificationParams>) -> Unit
-    ): Later<Any> = cache.loadSignUpParams().andThen { params ->
+    ): Later<Any> {
+        val params = parseUrlToEmailVerificationParams(link)
         ui.value = Loading(message = "Verifying your account (${params.email}), please wait . . . ")
-        api.verify(VerificationParams(params.email, parseToken(link).getOrThrow()))
-    }.andThen {
-        cache.removeSignUpParams()
-        cache.save(it)
-    }.finally {
-        onCompleted(it)
-        ui.value = it.toLazyState()
+        return api.verify(params).finally {
+            onCompleted(it)
+            ui.value = it.toLazyState()
+        }
     }
 
     companion object {
@@ -59,5 +57,30 @@ class VerificationScene(
 
         internal val QUERY_PARAMS_NOT_PROVIDED = IllegalArgumentException("Query params where not provided")
         internal val TOKEN_NOT_FOUND_IN_LINK = IllegalArgumentException("Could not obtain verification token")
+
+        internal fun parseUrlToEmailVerificationParams(url: String): VerificationParams {
+            val query = url.substringAfter("?", "")
+            val queryPairs = query.split("&").mapNotNull {
+                val parts = it.split("=")
+                if (parts.size == 2) {
+                    val key = parts[0]
+                    val value = decodeUrlComponent(parts[1])
+                    key to value
+                } else {
+                    null
+                }
+            }.toMap()
+
+            val email = queryPairs["email"] ?: throw Exception("Failed to read email")
+            val token = queryPairs["token"] ?: throw Exception("Failed to read token")
+
+            return VerificationParams(email=email, token=token)
+        }
+
+        internal fun decodeUrlComponent(value: String): String {
+            return value.replace("+", " ").replace("%([0-9A-Fa-f]{2})".toRegex()) {
+                it.groupValues[1].toInt(16).toChar().toString()
+            }
+        }
     }
 }
