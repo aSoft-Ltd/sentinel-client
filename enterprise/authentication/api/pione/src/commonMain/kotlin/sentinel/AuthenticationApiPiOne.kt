@@ -47,6 +47,7 @@ class AuthenticationApiPiOne(
         val text = client.post(path.signin) {
             setBody(params.toJson())
         }.bodyAsText()
+        println("Received response: ${text}")
         val resp = codec.decodeFromString<JsonObject>(text);
         if (resp.isSuccess) {
             text.toPiOneResponse().also {

@@ -8,6 +8,7 @@ import identifier.CorporatePresenter
 import identifier.IdentifierSettings
 import identifier.fields.CorporateFields
 import identifier.fields.CorporateOutput
+import identifier.transformers.toOutput
 import identifier.transformers.toParams
 import identifier.transformers.toPresenter
 import kase.Loading
@@ -37,7 +38,7 @@ class BusinessInfoScene(
             ui.value = it.toLazyState()
         }
     }
-    private fun form(settings: IdentifierSettings<CorporatePresenter>) = CorporateFields(settings.data, settings.country).toForm(
+    private fun form(settings: IdentifierSettings<CorporatePresenter>) = CorporateFields(settings.data, settings.data.toOutput(), settings.country).toForm(
         heading = "Business Info",
         details = "Update your information",
         config = config.toSubmitConfig()

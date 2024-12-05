@@ -8,6 +8,6 @@ import kotlinx.JsExport
 
 interface AuthenticationApi : AuthenticationScheme {
 
-    fun signOut(): Later<UserSession>
-    fun session(): Later<UserSession>
+    fun signOut(): Later<Unit>
+    fun session(onFresh:((UserSession)->Unit)?=null): Later<UserSession>
 }
