@@ -43,7 +43,7 @@ class EmailAuthenticationScopedApiFlix(
         }
     }
 
-    override fun session(): Later<UserSession> = options.scope.later {
+    override fun session(onFresh: ((UserSession) -> Unit)?): Later<UserSession> = options.scope.later {
         val tracer = logger.trace(actions.session())
         val session = cache.load(options.sessionCacheKey, UserSession.serializer()).await()
         client.post(endpoint.session()) {
@@ -52,7 +52,7 @@ class EmailAuthenticationScopedApiFlix(
         }.getOrThrow(codec, tracer)
     }
 
-    override fun signOut(): Later<UserSession> = options.scope.later {
+    override fun signOut(): Later<Unit> = options.scope.later {
         val session = cache.load(options.sessionCacheKey, UserSession.serializer()).await()
         val tracer = logger.trace(actions.signOut(session.secret))
         client.get(endpoint.signOut(session.secret)){
